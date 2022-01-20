@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["roommate", "maneger"],
+    enum: ["roommate", "manager"],
     required: true,
   },
   date: {
@@ -37,6 +37,10 @@ userSchema.methods.isRoommate = function () {
 
 userSchema.methods.isManeger = function () {
   return this.role === "maneger";
+};
+
+userSchema.methods.isAdmin = function () {
+  return this.role === "admin";
 };
 
 // mongoose schema middleware
