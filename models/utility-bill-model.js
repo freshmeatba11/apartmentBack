@@ -43,7 +43,7 @@ const utilityBillSchema = new mongoose.Schema({
       type: Number,
       required: true,
       min: 0,
-      max: 9999,
+      max: 99999,
     },
     usage: {
       type: Number,
@@ -57,7 +57,7 @@ const utilityBillSchema = new mongoose.Schema({
       type: Number,
       required: true,
       min: 0,
-      max: 9999,
+      max: 99999,
     },
     usage: {
       type: Number,
@@ -71,7 +71,7 @@ const utilityBillSchema = new mongoose.Schema({
       type: Number,
       required: true,
       min: 0,
-      max: 9999,
+      max: 99999,
     },
     usage: {
       type: Number,
@@ -85,7 +85,7 @@ const utilityBillSchema = new mongoose.Schema({
       type: Number,
       required: true,
       min: 0,
-      max: 9999,
+      max: 99999,
     },
     usage: {
       type: Number,

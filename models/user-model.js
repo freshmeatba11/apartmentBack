@@ -22,8 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["roommate", "manager"],
-    required: true,
+    default: "roommate",
   },
   date: {
     type: Date,

@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const authRoute = require("./routes").auth;
 const postRoute = require("./routes").post;
+const utilityBillRoute = require("./routes").utilityBill;
 const passport = require("passport");
 require("./config/passport")(passport);
 
@@ -29,6 +30,11 @@ app.use(
   "/api/posts",
   passport.authenticate("jwt", { session: false }),
   postRoute
+);
+app.use(
+  "/api/utilitybill",
+  passport.authenticate("jwt", { session: false }),
+  utilityBillRoute
 );
 
 app.listen(8080, () => {
