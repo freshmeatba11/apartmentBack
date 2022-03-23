@@ -34,8 +34,8 @@ userSchema.methods.isRoommate = function () {
   return this.role === "roommate";
 };
 
-userSchema.methods.isManeger = function () {
-  return this.role === "maneger";
+userSchema.methods.isManager = function () {
+  return this.role === "manager";
 };
 
 userSchema.methods.isAdmin = function () {

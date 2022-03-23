@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
   const { error } = postValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let { title, content } = req.body;
+  let { title, content, important } = req.body;
   if (req.user.isRoommate()) {
     return res.status(400).send("Only manager can write a new post.");
   }
@@ -43,6 +43,7 @@ router.post("/", async (req, res) => {
   let newPost = new Post({
     title,
     content,
+    important,
     author: req.user._id,
   });
 
@@ -69,7 +70,10 @@ router.patch("/:_id", async (req, res) => {
     });
   }
 
-  if (post.author.equals(req.user._id) || req.user.isAdmin()) {
+  if (
+    req.user.isAdmin() ||
+    (post.author.equals(req.user._id) && req.user.isManager())
+  ) {
     Post.findByIdAndUpdate({ _id }, req.body, {
       new: true,
       runValidators: true,
@@ -103,7 +107,10 @@ router.delete("/:_id", async (req, res) => {
     });
   }
 
-  if (post.author.equals(req.user._id) || req.user.isAdmin()) {
+  if (
+    req.user.isAdmin() ||
+    (post.author.equals(req.user._id) && req.user.isManager())
+  ) {
     Post.deleteOne({ _id })
       .then(() => {
         res.send("Post deleted.");

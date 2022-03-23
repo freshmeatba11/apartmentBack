@@ -26,15 +26,14 @@ router.post("/", async (req, res) => {
   let {
     title,
     recordDate,
-    totalDegree,
-    publicUsage,
+    previousTotalDegree,
+    currentTotalDegree,
     gas,
     people,
     roomA,
     roomB,
     roomC,
     roomD,
-    desc,
   } = req.body;
   if (req.user.isRoommate()) {
     return res.status(400).send("Only manager can make a new record.");
@@ -43,15 +42,14 @@ router.post("/", async (req, res) => {
   let newUtilityBill = new UtilityBill({
     title,
     recordDate,
-    totalDegree,
-    publicUsage,
+    previousTotalDegree,
+    currentTotalDegree,
     gas,
     people,
     roomA,
     roomB,
     roomC,
     roomD,
-    desc,
     author: req.user._id,
   });
 
@@ -78,7 +76,10 @@ router.patch("/:_id", async (req, res) => {
     });
   }
 
-  if (utilityBill.author.equals(req.user._id) || req.user.isAdmin()) {
+  if (
+    req.user.isAdmin() ||
+    (post.author.equals(req.user._id) && req.user.isManager())
+  ) {
     UtilityBill.findByIdAndUpdate({ _id }, req.body, {
       new: true,
       runValidators: true,
@@ -113,7 +114,10 @@ router.delete("/:_id", async (req, res) => {
     });
   }
 
-  if (utilityBill.author.equals(req.user._id) || req.user.isAdmin()) {
+  if (
+    req.user.isAdmin() ||
+    (post.author.equals(req.user._id) && req.user.isManager())
+  ) {
     UtilityBill.deleteOne({ _id })
       .then(() => {
         res.send("Record deleted.");

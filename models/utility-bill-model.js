@@ -11,18 +11,17 @@ const utilityBillSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  totalDegree: {
+  previousTotalDegree: {
     type: Number,
     required: true,
     min: 0,
     max: 99999,
   },
-  publicUsage: {
+  currentTotalDegree: {
     type: Number,
     required: true,
     min: 0,
-    max: 500,
-    default: 0,
+    max: 99999,
   },
   gas: {
     type: Number,
@@ -39,65 +38,80 @@ const utilityBillSchema = new mongoose.Schema({
     default: 1,
   },
   roomA: {
-    degree: {
+    previousDegree: {
       type: Number,
       required: true,
       min: 0,
       max: 99999,
     },
-    usage: {
+    currentDegree: {
       type: Number,
       required: true,
       min: 0,
-      max: 1000,
+      max: 99999,
+    },
+    desc: {
+      type: String,
+      maxLength: 100,
+      default: "",
     },
   },
   roomB: {
-    degree: {
+    previousDegree: {
       type: Number,
       required: true,
       min: 0,
       max: 99999,
     },
-    usage: {
+    currentDegree: {
       type: Number,
       required: true,
       min: 0,
-      max: 1000,
+      max: 99999,
+    },
+    desc: {
+      type: String,
+      maxLength: 100,
+      default: "",
     },
   },
   roomC: {
-    degree: {
+    previousDegree: {
       type: Number,
       required: true,
       min: 0,
       max: 99999,
     },
-    usage: {
+    currentDegree: {
       type: Number,
       required: true,
       min: 0,
-      max: 1000,
+      max: 99999,
+    },
+    desc: {
+      type: String,
+      maxLength: 100,
+      default: "",
     },
   },
   roomD: {
-    degree: {
+    previousDegree: {
       type: Number,
       required: true,
       min: 0,
       max: 99999,
     },
-    usage: {
+    currentDegree: {
       type: Number,
       required: true,
       min: 0,
-      max: 1000,
+      max: 99999,
     },
-  },
-  desc: {
-    type: String,
-    maxLength: 100,
-    default: "",
+    desc: {
+      type: String,
+      maxLength: 100,
+      default: "",
+    },
   },
   formDate: {
     type: Date,

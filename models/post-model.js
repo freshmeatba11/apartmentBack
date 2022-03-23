@@ -21,6 +21,11 @@ const postSchema = new mongoose.Schema({
     maxlength: 1000,
     required: true,
   },
+  important: {
+    type: String,
+    enum: ["off", "on"],
+    default: "off",
+  },
 });
 
 module.exports = mongoose.model("Post", postSchema);
