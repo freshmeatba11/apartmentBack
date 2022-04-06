@@ -9,6 +9,7 @@ const utilityBillRoute = require("./routes").utilityBill;
 const passport = require("passport");
 require("./config/passport")(passport);
 const cors = require("cors");
+const PORT = process.env.PORT || 8080;
 
 // connect to DB
 mongoose
@@ -39,6 +40,6 @@ app.use(
   utilityBillRoute
 );
 
-app.listen(8080, () => {
-  console.log("Server running on port 8080.");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}.`);
 });
